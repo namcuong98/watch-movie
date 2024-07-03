@@ -53,7 +53,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="bg-blue-900 text-white">
+      <div className="bg-[#111319] text-[#fff]">
         <div className="h-[60px]">
           <header
             style={{ backgroundColor: bgColor }}

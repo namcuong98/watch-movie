@@ -5,6 +5,18 @@ const axiosInstance = axios.create({
   method: "GET",
 });
 
-export const getData = (config) => {
-  return axiosInstance(config);
+const filmAPI = axios.create({
+  baseURL: "https://phim.nguonc.com/api/film/",
+  method: "GET",
+});
+
+export const saveFilm = (info) => sessionStorage.setItem("infoFilm", info);
+export const takeFilm = sessionStorage.getItem("infoFilm");
+
+export const getData = (url) => {
+  return axiosInstance(url);
+};
+
+export const getDataFilmDetail = (url) => {
+  return filmAPI(url);
 };

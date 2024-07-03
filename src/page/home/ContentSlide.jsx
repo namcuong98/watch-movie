@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useResponsiveScreen } from "../../utils/Responsive";
-import SlideMovies from "../../components/SlideMovies";
+import SlideMovie from "../../components/SlideMovie";
 
-const ContentSlide = ({ contentSlide }) => {
+const ContentSlide = ({ contentSlide, path }) => {
   const [startIndex, setStartIndex] = useState(0);
   const { isDesktop, isTablet, isMobile, isSmallMobile } =
     useResponsiveScreen();
@@ -45,7 +45,7 @@ const ContentSlide = ({ contentSlide }) => {
           {contentSlide
             .slice(startIndex, startIndex + itemsPerPage)
             .map((item) => {
-              return <SlideMovies item={item} />;
+              return <SlideMovie item={item} path={path} />;
             })}
         </div>
         <button

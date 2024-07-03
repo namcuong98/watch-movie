@@ -54,6 +54,10 @@ const Home = () => {
     };
   }, [dispatch]);
 
+  // if (newMovies.length !== 0 && isShowing.length !== 0 && movies.length !== 0 &&series.length !== 0 && tvShows.length !==0) {
+
+  // }
+
   useEffect(() => {
     getData({
       url: "phim-moi-cap-nhat?page=1",
@@ -120,31 +124,31 @@ const Home = () => {
         <div className="mt-9 wrap-listMovie" id="new-movies">
           {<ListMovies path={"new-movies"} title={"Mới & Phổ biến"} />}
           <div className="flex">
-            <ContentSlide contentSlide={newMovies} />
+            <ContentSlide path={"new-movies"} contentSlide={newMovies} />
           </div>
         </div>
         <div className="mt-9 wrap-listMovie" id="now-showing">
           {<ListMovies path={"now-showing"} title={"Phim đang chiếu"} />}
           <div className="flex">
-            <ContentSlide contentSlide={isShowing} />
+            <ContentSlide path={"now-showing"} contentSlide={isShowing} />
           </div>
         </div>
         <div className="mt-9 wrap-listMovie" id="movies">
           {<ListMovies path={"movies"} title={"Phim lẻ"} />}
           <div className="flex">
-            <ContentSlide contentSlide={movies} />
+            <ContentSlide path={"movies"} contentSlide={movies} />
           </div>
         </div>
         <div className="mt-9 wrap-listMovie" id="series">
           {<ListMovies path={"series"} title={"Phim bộ"} />}
           <div className="flex">
-            <ContentSlide contentSlide={series} />
+            <ContentSlide path={"series"} contentSlide={series} />
           </div>
         </div>
         <div className="mt-9 wrap-listMovie" id="tv-shows">
           {<ListMovies path={"tv-shows"} title={"TV Shows"} />}
           <div className="flex">
-            <ContentSlide contentSlide={tvShows} />
+            <ContentSlide path={"tv-shows"} contentSlide={tvShows} />
           </div>
         </div>
       </div>

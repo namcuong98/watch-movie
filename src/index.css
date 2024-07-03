@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow-x:hidden;
+  width: 100%;
+}
+
+/* buộc trang web phải chiếm 100% không gian khả dụng và ẩn mọi chức năng cuộn ngang. */
+
 .header {
   background-image: linear-gradient(
     180deg,
@@ -26,6 +33,34 @@
   border-bottom: 1px red solid;
 }
 
-.wrap-films {
-  /* grid-template-columns: auto auto auto auto; */
+.darken_left {
+  background-image: linear-gradient(270deg, rgba(17, 19, 25, 0) 0%, rgba(17, 19, 25, 0.05) 16%, rgba(17, 19, 25, 0.2) 30%, rgba(17, 19, 25, 0.39) 43%, rgba(17, 19, 25, 0.61) 55%, rgba(17, 19, 25, 0.8) 68%, rgba(17, 19, 25, 0.95) 82%, rgb(17, 19, 25) 98%);
+}
+
+.darken_bottom {
+  background-image: linear-gradient(179deg, rgba(17, 19, 25, 0) 1%, rgba(17, 19, 25, 0.05) 17%, rgba(17, 19, 25, 0.2) 31%, rgba(17, 19, 25, 0.39) 44%, rgba(17, 19, 25, 0.61) 56%, rgba(17, 19, 25, 0.8) 69%, rgba(17, 19, 25, 0.95) 83%, rgb(17, 19, 25) 99%);
+}
+
+.paginate *  {
+  color: #fff !important;
+}
+
+.ant-pagination-item-active {
+  border-color: transparent !important;
+}
+
+.ant-pagination-item-active a {
+  color: #333 !important;
+}
+
+.ant-select-item-option-content, .ant-select-selection-item{
+  color: #333 !important;
+}
+
+.ant-select-arrow span svg{
+  fill: #333 !important;
+}
+
+.ant-pagination-options-quick-jumper input {
+  color: #333 !important;
 }

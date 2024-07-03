@@ -1,33 +1,43 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./page/home";
-import Movies from "./page/movies";
-import Series from "./page/series";
 import Favourites from "./page/favourites";
-import NewMovies from "./page/newMovies";
-import NowShowing from "./page/nowShowing";
-import TVShows from "./page/TVShows";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { MenuData } from "./components/HardData";
+import Films from "./page/films/Films";
+import FilmDetail from "./components/FilmDetail";
+import WatchMovie from "./components/WatchMovie";
 
 function App() {
+  const routerFilms = MenuData.slice(1, -1);
+
   return (
     <>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="new-movies" element={<NewMovies />} />
-              <Route path="now-showing" element={<NowShowing />} />
-              <Route path="movies" element={<Movies />} />
-              <Route path="series" element={<Series />} />
-              <Route path="tv-shows" element={<TVShows />} />
-              <Route path="favourites" element={<Favourites />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            {routerFilms.map((router) => {
+              return (
+                <>
+                  <Route
+                    path={`${router.path}`}
+                    element={<Films data={router} />}
+                  ></Route>
+                  <Route
+                    path={`${router.path}/:filmSlug`}
+                    element={<FilmDetail />}
+                  />
+                  <Route
+                    path={`${router.path}/:filmSlug/xem-phim`}
+                    element={<WatchMovie />}
+                  />
+                </>
+              );
+            })}
+            <Route path="favourites" element={<Favourites />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
