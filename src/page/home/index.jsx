@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getData } from "../../utils/axios";
+import { getData, saveFilm } from "../../utils/axios";
 import ContentSlide from "./ContentSlide";
 import ListMovies from "./ListMovies";
 import { useDispatch } from "react-redux";
 import { selectPage } from "../../redux/navigationSlice";
+import { getRandomBanner } from "./Banner";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [newMovies, setNewMovies] = useState([]);
@@ -11,7 +13,19 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [tvShows, setTvShows] = useState([]);
+  const [banner, setBanner] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleWatchMovie = (banner) => {
+    saveFilm(banner.name);
+    navigate(`new-movies/${banner.name}/xem-phim`);
+  };
+
+  const handleDetail = (banner) => {
+    saveFilm(banner.name);
+    navigate(`new-movies/${banner.name}`);
+  };
 
   useEffect(() => {
     const sections = [
@@ -57,6 +71,11 @@ const Home = () => {
   // if (newMovies.length !== 0 && isShowing.length !== 0 && movies.length !== 0 &&series.length !== 0 && tvShows.length !==0) {
 
   // }
+
+  useEffect(() => {
+    const infoBanner = getRandomBanner();
+    setBanner(infoBanner);
+  }, []);
 
   useEffect(() => {
     getData({
@@ -121,34 +140,80 @@ const Home = () => {
   return (
     <>
       <div>
-        <div className="mt-9 wrap-listMovie" id="new-movies">
-          {<ListMovies path={"new-movies"} title={"Mới & Phổ biến"} />}
-          <div className="flex">
-            <ContentSlide path={"new-movies"} contentSlide={newMovies} />
+        <div className="h-[75vh] w-full overflow-hidden">
+          {/* responsive ở h-[75vh] chỉnh theo chế độ màn hình sửa đen 2 đầu video */}
+          <div
+            className="absolute left-[-48px] h-[845px] top-[-126px] object-cover wrap-banner"
+            style={{ width: `calc(100% + 48px)` }}
+          >
+            {banner.trailer && (
+              <>
+                <div className="absolute top-[22%] left-[48px] h-[500px] z-10 ml-[48px]">
+                  <div className="w-[500px] h-[300px]">
+                    <img className="w-full h-full" src={banner.logo} alt="" />
+                    <p className="line-clamp-4">{banner.describe}</p>
+                  </div>
+                  <div className="flex items-center mt-[100px] justify-center">
+                    <button
+                      onClick={() => handleWatchMovie(banner)}
+                      className="m-3 font-bold bg-[#1cc749] cursor-pointer w-[132px] h-[40px] py-2 px-4 rounded flex gap-2 items-center justify-center hover:bg-[#49d26d] "
+                    >
+                      <i class="fa-solid fa-play"></i>
+                      <span>Xem Phim</span>
+                    </button>
+                    <button
+                      onClick={() => handleDetail(banner)}
+                      className="m-3 font-bold bg-[#2d2f34] cursor-pointer w-[132px] h-[40px] py-2 px-4 rounded flex gap-2 items-center justify-center hover:bg-[#56575b]"
+                    >
+                      <i class="fa-solid fa-play"></i>
+                      <span>Chi tiết</span>
+                    </button>
+                  </div>
+                </div>
+                <video
+                  style={{ width: `calc(100% + 48px)` }}
+                  className="banner absolute h-[845px] object-cover"
+                  autoPlay
+                  muted
+                  loop
+                >
+                  <source src={banner.trailer} type="video/mp4" />
+                </video>
+              </>
+            )}
           </div>
         </div>
-        <div className="mt-9 wrap-listMovie" id="now-showing">
-          {<ListMovies path={"now-showing"} title={"Phim đang chiếu"} />}
-          <div className="flex">
-            <ContentSlide path={"now-showing"} contentSlide={isShowing} />
+
+        <div className="relative">
+          <div className="mt-9 wrap-listMovie" id="new-movies">
+            {<ListMovies path={"new-movies"} title={"Mới & Phổ biến"} />}
+            <div className="flex">
+              <ContentSlide path={"new-movies"} contentSlide={newMovies} />
+            </div>
           </div>
-        </div>
-        <div className="mt-9 wrap-listMovie" id="movies">
-          {<ListMovies path={"movies"} title={"Phim lẻ"} />}
-          <div className="flex">
-            <ContentSlide path={"movies"} contentSlide={movies} />
+          <div className="mt-9 wrap-listMovie" id="now-showing">
+            {<ListMovies path={"now-showing"} title={"Phim đang chiếu"} />}
+            <div className="flex">
+              <ContentSlide path={"now-showing"} contentSlide={isShowing} />
+            </div>
           </div>
-        </div>
-        <div className="mt-9 wrap-listMovie" id="series">
-          {<ListMovies path={"series"} title={"Phim bộ"} />}
-          <div className="flex">
-            <ContentSlide path={"series"} contentSlide={series} />
+          <div className="mt-9 wrap-listMovie" id="movies">
+            {<ListMovies path={"movies"} title={"Phim lẻ"} />}
+            <div className="flex">
+              <ContentSlide path={"movies"} contentSlide={movies} />
+            </div>
           </div>
-        </div>
-        <div className="mt-9 wrap-listMovie" id="tv-shows">
-          {<ListMovies path={"tv-shows"} title={"TV Shows"} />}
-          <div className="flex">
-            <ContentSlide path={"tv-shows"} contentSlide={tvShows} />
+          <div className="mt-9 wrap-listMovie" id="series">
+            {<ListMovies path={"series"} title={"Phim bộ"} />}
+            <div className="flex">
+              <ContentSlide path={"series"} contentSlide={series} />
+            </div>
+          </div>
+          <div className="mt-9 wrap-listMovie" id="tv-shows">
+            {<ListMovies path={"tv-shows"} title={"TV Shows"} />}
+            <div className="flex">
+              <ContentSlide path={"tv-shows"} contentSlide={tvShows} />
+            </div>
           </div>
         </div>
       </div>

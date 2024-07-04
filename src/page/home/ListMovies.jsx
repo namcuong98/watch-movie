@@ -10,7 +10,7 @@ const ListMovies = ({ title, path }) => {
   };
 
   return (
-    <div className="flex gap-6 items-center text-xl">
+    <div className="flex gap-6 items-center text-xl relative z-20">
       <h1>{title}</h1>
       <Link to={path}>
         <div

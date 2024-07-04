@@ -15,8 +15,8 @@ const WatchMovie = () => {
         url: takeFilm,
       })
         .then((res) => {
-          console.log(res.data.movie.episodes[0].items);
           setEpisodes(res.data.movie.episodes[0].items);
+          console.log(res.data.movie.episodes[0].items);
           setTotalEpisodes(res.data.movie.episodes[0].items.length);
         })
         .catch((err) => {
@@ -33,14 +33,16 @@ const WatchMovie = () => {
         <div className=" flex items-center justify-center flex-col gap-16">
           {episodes[currentEpisode - 1] &&
             episodes[currentEpisode - 1].embed && (
-              <iframe
-                src={`${episodes[currentEpisode - 1].embed}`}
-                width="800"
-                height="450"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="WatchMovie"
-              ></iframe>
+              <div className=" bg-slate-100">
+                <iframe
+                  src={episodes[currentEpisode - 1].embed}
+                  width="800"
+                  height="450"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen=""
+                  title="WatchMovie"
+                ></iframe>
+              </div>
             )}
           <Paginate
             pagination={totalEpisodes}

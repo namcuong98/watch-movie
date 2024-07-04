@@ -1,13 +1,16 @@
 import Seaching from "./Seaching";
 
-const ActiveSearch = ({ searchRef, isSearch, setIsSearch }) => {
+const ActiveSearch = ({ isSearch, setIsSearch }) => {
   return (
     <>
-      <div className="cursor-pointer" ref={searchRef}>
+      <div className="cursor-pointer">
         {!isSearch ? (
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <i
+            className="fa-solid fa-magnifying-glass"
+            onClick={() => setIsSearch(true)}
+          ></i>
         ) : (
-          <Seaching />
+          <Seaching setIsSearch={setIsSearch} />
         )}
       </div>
     </>

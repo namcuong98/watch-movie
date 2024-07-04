@@ -6,6 +6,7 @@ import { MenuData } from "./components/HardData";
 import Films from "./page/films/Films";
 import FilmDetail from "./components/FilmDetail";
 import WatchMovie from "./components/WatchMovie";
+import FindFilm from "./page/FindFilm";
 
 function App() {
   const routerFilms = MenuData.slice(1, -1);
@@ -34,6 +35,7 @@ function App() {
                 </>
               );
             })}
+            <Route path="tim-kiem" element={<FindFilm />} />
             <Route path="favourites" element={<Favourites />} />
           </Route>
         </Routes>

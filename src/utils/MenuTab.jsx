@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { MenuData } from "../components/HardData";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPage } from "../redux/navigationSlice";
+import { saveWordSearch } from "./axios";
+import { searchWord } from "../redux/findFilmSlice";
 
-export const MenuTab = () => {
+export const MenuTab = ({ isSearch, setIsSearch }) => {
   const dispatch = useDispatch();
   const selectedPage = useSelector((state) => state.navigation.selected);
   const currentPath = window.location.pathname;
@@ -18,13 +20,17 @@ export const MenuTab = () => {
     }
   };
 
-  const handleClick = (name) => {
-    dispatch(selectPage(name));
+  const handleClick = (item) => {
+    saveWordSearch(null);
+    dispatch(selectPage(item.name));
+    if (isSearch) {
+      setIsSearch(false);
+      dispatch(searchWord(""));
+    }
   };
 
   useEffect(() => {
     if (currentPath === "/") {
-      console.log("trang chủ");
       dispatch(selectPage("Trang Chủ"));
     }
   }, [currentPath, dispatch]);
@@ -50,7 +56,7 @@ export const MenuTab = () => {
                   <li
                     className={selectedPage === item.name ? "selected" : ""}
                     onClick={() => {
-                      handleClick(item.name);
+                      handleClick(item);
                     }}
                     key={item.id}
                   >
@@ -66,7 +72,16 @@ export const MenuTab = () => {
   );
 };
 
-export const MenuTabRps = () => {
+export const MenuTabRps = ({ isSearch, setIsSearch }) => {
+  const dispatch = useDispatch();
+  const handleClick = (item) => {
+    saveWordSearch(null);
+    dispatch(selectPage(item.name));
+    if (isSearch) {
+      setIsSearch(false);
+      dispatch(searchWord(""));
+    }
+  };
   return (
     <>
       <ul className="fixed top-0 bottom-0 left-0 z-10 bg-black text-white pt-12">
@@ -74,7 +89,11 @@ export const MenuTabRps = () => {
           return (
             <>
               <Link to={item.path}>
-                <li key={item.id} className="px-12 py-4 hover:bg-slate-700">
+                <li
+                  key={item.id}
+                  className="px-12 py-4 hover:bg-slate-700"
+                  onClick={() => handleClick(item)}
+                >
                   {item.name}
                 </li>
               </Link>

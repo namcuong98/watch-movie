@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getData, saveFilm } from "../utils/axios";
+import {
+  getData,
+  saveFilm,
+  saveWordSearch,
+  takeWordSearch,
+} from "../utils/axios";
 import { useResponsiveScreen } from "../utils/Responsive";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Paginate from "./Paginate";
 
 const DetailedList = ({ defaultPage }) => {
   const [films, setFilms] = useState([]);
-  const urlNotPage = defaultPage.substring(0, defaultPage.length - 1);
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
   const { isDesktop, isTablet, isMobile, isSmallMobile } =
     useResponsiveScreen();
@@ -26,11 +31,18 @@ const DetailedList = ({ defaultPage }) => {
 
   const handleClick = (item) => {
     saveFilm(item);
+    if (takeWordSearch) {
+      console.log("first");
+      navigate(`/new-movies/${item}`);
+      saveWordSearch(null);
+    } else {
+      navigate(`${item}`);
+    }
   };
 
   useEffect(() => {
     getData({
-      url: `${urlNotPage}${page}`,
+      url: `${defaultPage}${page}`,
     })
       .then((res) => {
         setFilms(res.data);
@@ -38,7 +50,7 @@ const DetailedList = ({ defaultPage }) => {
       .catch((err) => {
         console.log("err", err);
       });
-  }, [page, urlNotPage]);
+  }, [page, defaultPage]);
 
   return (
     <>
@@ -48,20 +60,18 @@ const DetailedList = ({ defaultPage }) => {
             films.items.map((item) => {
               return (
                 <>
-                  <Link to={`${item.slug}`}>
-                    <div
-                      onClick={() => handleClick(item.slug)}
-                      className="cursor-pointer"
-                    >
-                      <div className="w-full h-full">
-                        <img
-                          className="w-full h-full"
-                          src={item.thumb_url}
-                          alt=""
-                        />
-                      </div>
+                  <div
+                    onClick={() => handleClick(item.slug)}
+                    className="cursor-pointer"
+                  >
+                    <div className="w-full h-full">
+                      <img
+                        className="w-full h-full"
+                        src={item.thumb_url}
+                        alt=""
+                      />
                     </div>
-                  </Link>
+                  </div>
                 </>
               );
             })}
