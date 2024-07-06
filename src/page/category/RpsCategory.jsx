@@ -19,7 +19,7 @@ const RpsCategory = () => {
   const items = [
     {
       key: 1,
-      //   item: "hanh-dong",
+      item: "hanh-dong",
       label: "Hành động",
       onClick: () => {
         setParam("hanh-dong");
@@ -27,7 +27,7 @@ const RpsCategory = () => {
     },
     {
       key: 2,
-      //   item: "phieu-luu",
+      item: "phieu-luu",
       label: "Phiêu lưu",
       onClick: () => {
         setParam("phieu-luu");
@@ -35,7 +35,7 @@ const RpsCategory = () => {
     },
     {
       key: 3,
-      //   item: "hoat-hinh",
+      item: "hoat-hinh",
       label: "Hoạt hình",
       onClick: () => {
         setParam("hoat-hinh");
@@ -43,7 +43,7 @@ const RpsCategory = () => {
     },
     {
       key: 4,
-      //   item: "hai",
+      item: "hai",
       label: "Hài",
       onClick: () => {
         setParam("hai");
@@ -51,7 +51,7 @@ const RpsCategory = () => {
     },
     {
       key: 5,
-      //   item: "hinh-su",
+      item: "hinh-su",
       label: "Hình sự",
       onClick: () => {
         setParam("hinh-su");
@@ -59,7 +59,7 @@ const RpsCategory = () => {
     },
     {
       key: 6,
-      //   item: "tai-lieu",
+      item: "tai-lieu",
       label: "Tài liệu",
       onClick: () => {
         setParam("tai-lieu");
@@ -67,7 +67,7 @@ const RpsCategory = () => {
     },
     {
       key: 7,
-      //   item: "chinh-kich",
+      item: "chinh-kich",
       label: "Chính kịch",
       onClick: () => {
         setParam("chinh-kich");
@@ -75,7 +75,7 @@ const RpsCategory = () => {
     },
     {
       key: 8,
-      //   item: "gia-dinh",
+      item: "gia-dinh",
       label: "Gia đình",
       onClick: () => {
         setParam("gia-dinh");
@@ -83,7 +83,7 @@ const RpsCategory = () => {
     },
     {
       key: 9,
-      //   item: "gia-tuong",
+      item: "gia-tuong",
       label: "Giả Tưởng",
       onClick: () => {
         setParam("gia-tuong");
@@ -91,7 +91,7 @@ const RpsCategory = () => {
     },
     {
       key: 10,
-      //   item: "lich-su",
+      item: "lich-su",
       label: "Lịch sử",
       onClick: () => {
         setParam("lich-su");
@@ -99,7 +99,7 @@ const RpsCategory = () => {
     },
     {
       key: 11,
-      //   item: "kinh-di",
+      item: "kinh-di",
       label: "Kinh dị",
       onClick: () => {
         setParam("kinh-di");
@@ -107,7 +107,7 @@ const RpsCategory = () => {
     },
     {
       key: 12,
-      //   item: "nhac",
+      item: "nhac",
       label: "Nhạc",
       onClick: () => {
         setParam("nhac");
@@ -115,7 +115,7 @@ const RpsCategory = () => {
     },
     {
       key: 13,
-      //   item: "bi-an",
+      item: "bi-an",
       label: "Bí ẩn",
       onClick: () => {
         setParam("bi-an");
@@ -123,7 +123,7 @@ const RpsCategory = () => {
     },
     {
       key: 14,
-      //   item: "lang-man",
+      item: "lang-man",
       label: "Lãng mạn",
       onClick: () => {
         setParam("lang-man");
@@ -131,7 +131,7 @@ const RpsCategory = () => {
     },
     {
       key: 15,
-      //   item: "khoa-hoc-vien-tuong",
+      item: "khoa-hoc-vien-tuong",
       label: "Khoa Học viễn Tưởng",
       onClick: () => {
         setParam("khoa-hoc-vien-tuong");
@@ -139,7 +139,7 @@ const RpsCategory = () => {
     },
     {
       key: 16,
-      //   item: "gay-can",
+      item: "gay-can",
       label: "Gay cấn",
       onClick: () => {
         setParam("gay-can");
@@ -147,7 +147,7 @@ const RpsCategory = () => {
     },
     {
       key: 17,
-      //   item: "chien-tranh",
+      item: "chien-tranh",
       label: "Chiến tranh",
       onClick: () => {
         setParam("chien-tranh");
@@ -155,7 +155,7 @@ const RpsCategory = () => {
     },
     {
       key: 18,
-      //   item: "tam-ly",
+      item: "tam-ly",
       label: "Tâm lý",
       onClick: () => {
         setParam("tam-ly");
@@ -163,7 +163,7 @@ const RpsCategory = () => {
     },
     {
       key: 19,
-      //   item: "tinh-cam",
+      item: "tinh-cam",
       label: "Tình cảm",
       onClick: () => {
         setParam("tinh-cam");
@@ -171,7 +171,7 @@ const RpsCategory = () => {
     },
     {
       key: 20,
-      //   item: "co-trang",
+      item: "co-trang",
       label: "Cổ trang",
       onClick: () => {
         setParam("co-trang");
@@ -179,7 +179,7 @@ const RpsCategory = () => {
     },
     {
       key: 21,
-      //   item: "mien-tay",
+      item: "mien-tay",
       label: "Miền tây",
       onClick: () => {
         setParam("mien-tay");
@@ -187,7 +187,7 @@ const RpsCategory = () => {
     },
     {
       key: 22,
-      //   item: "phim-18+",
+      item: "phim-18+",
       label: "Phim 18+",
       onClick: () => {
         setParam("phim-18+");
@@ -220,13 +220,14 @@ const RpsCategory = () => {
     }
   };
 
+  const nameCategory = items.filter((category) => category.item === param);
+
   useEffect(() => {
     getData({
       url: `the-loai/${param}?page=${page}`,
     })
       .then((res) => {
         setData(res.data);
-        console.log("res.data", res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -235,7 +236,11 @@ const RpsCategory = () => {
 
   return (
     <div className="mt-[50px] relative">
-      <div className="top-[50px] flex justify-end right-0">
+      <div className="top-[50px] flex justify-between items-center right-0">
+        <div className="flex text_small mt-5 p-8">
+          <p>Thể loại: </p>
+          <span className="ml-2">Phim {nameCategory[0].label}</span>
+        </div>
         <Dropdown
           className=""
           menu={{
@@ -244,27 +249,51 @@ const RpsCategory = () => {
           placement="bottomLeft"
           arrow
         >
-          <Button>bottomLeft</Button>
+          <Button className="button_category">Chọn Thể loại phim</Button>
         </Dropdown>
       </div>
-      <div className={`grid ${gridColsClass} grid-flow-row gap-4`}>
+      <div className={`grid ${gridColsClass} grid-flow-row gap-4 `}>
         {data.items &&
-          data.items.map((item) => {
+          data.items.map((item, index) => {
             return (
-              <>
-                <div
-                  onClick={() => handleClick(item.slug)}
-                  className="cursor-pointer"
-                >
-                  <div className="w-full h-full">
+              <div
+                key={index}
+                className="mx-[10px] mt-[10px] mb-10 w-full cursor-pointer "
+                onClick={() => handleClick(item.slug)}
+              >
+                <div className="w-full h-[300px] relative rounded-tr-md rounded-tl-md overflow-hidden wrap-banner">
+                  <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1">
+                    Chỉ có trên IQTV
+                  </p>
+                  <div className="mb-3 ">
                     <img
-                      className="w-full h-full"
+                      title={item.name}
+                      className="w-full h-[300px] object-cover"
                       src={item.thumb_url}
-                      alt=""
+                      alt="Loading"
                     />
+                    <div className="flex">
+                      <div className="absolute bottom-[20px] left-[6px] text-[#fff] z-10 flex items-center gap-2">
+                        <i className="fa-solid fa-star"></i>
+                        <p>{(8 + Math.random() * 2).toFixed(1)}</p>
+                      </div>
+                      <div className="absolute bottom-[20px] right-[6px] rounded-sm p-1 text-xs font-bold bg-[#e66f20] z-10 flex items-center gap-2">
+                        <p className="">{item.current_episode}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </>
+                <div>
+                  <div className="flex items-start">
+                    <span>
+                      Tên phim:
+                      <span className="text-base text-[#cbcbcc] ml-2">
+                        {item.name}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
             );
           })}
       </div>

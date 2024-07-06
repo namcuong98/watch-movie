@@ -6,12 +6,14 @@ import SuggestFilms from "./SuggestFilms";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useResponsivenessOverall } from "../utils/Responsive";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FilmDetail = () => {
   const navigate = useNavigate();
   const [filmDetail, setFilmDetail] = useState([]);
   const [suggest, setSuggest] = useState([]);
   const { rpsBannerInfoBtn } = useResponsivenessOverall();
+  const { isAuthenticated } = useAuth0();
   const flag = useSelector((state) => state.flag.selected);
 
   const watchMovie = () => {
@@ -31,13 +33,15 @@ const FilmDetail = () => {
       JSON.parse(localStorage.getItem("favouritesArray")) || [];
     // some duyệt qua mảng trả về giá trị true false nếu thoả mãn điều kiện
     const filmExists = currentArray.some((item) => item.film === takeFilm);
-    if (!filmExists) {
+    if (!filmExists && isAuthenticated) {
       const newItem = {
         id: uuidv4(),
         film: takeFilm,
       };
       currentArray.push(newItem);
       alert("Đã thêm phim vào danh sách");
+    } else if (!filmExists && !isAuthenticated) {
+      alert("Bạn cần phải đăng nhập trước");
     } else {
       alert("Phim đã có trong danh sách trước đó");
     }
