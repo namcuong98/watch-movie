@@ -35,11 +35,11 @@ const ContentSlide = ({ contentSlide, path }) => {
     <>
       <div className="relative flex justify-center items-center w-full">
         <button
-          className="absolute h-[60%] left-0"
+          className="button_slide left-0 cursor-pointer hover:text-gray-400"
           onClick={prevSlide}
           disabled={startIndex === 0}
         >
-          <i class="fa-solid fa-chevron-left"></i>
+          <i className="fa-solid fa-chevron-left"></i>
         </button>
         <div className="flex w-full">
           {contentSlide
@@ -49,11 +49,11 @@ const ContentSlide = ({ contentSlide, path }) => {
             })}
         </div>
         <button
-          className="absolute h-[60%] right-0"
+          className=" button_slide right-0 cursor-pointer hover:text-gray-400"
           onClick={nextSlide}
           disabled={startIndex === contentSlide.length - itemsPerPage}
         >
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
     </>

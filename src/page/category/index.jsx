@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  getData,
-  saveFilm,
-  saveWordSearch,
-  takeWordSearch,
-} from "../utils/axios";
-import { useResponsiveScreen } from "../utils/Responsive";
+import Paginate from "../../components/Paginate";
 import { useNavigate } from "react-router-dom";
-import Paginate from "./Paginate";
+import { useResponsiveScreen } from "../../utils/Responsive";
+import { getData, saveFilm } from "../../utils/axios";
 
-const DetailedList = ({ defaultPage }) => {
+const Category = () => {
   const [films, setFilms] = useState([]);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const currentPath = window.location.pathname;
+  // Lấy ra url hiện tại
 
   const { isDesktop, isTablet, isMobile, isSmallMobile } =
     useResponsiveScreen();
@@ -31,30 +28,29 @@ const DetailedList = ({ defaultPage }) => {
 
   const handleClick = (item) => {
     saveFilm(item);
-    if (takeWordSearch) {
-      navigate(`/new-movies/${item}`);
-      saveWordSearch(null);
-    } else {
-      navigate(`${item}`);
-    }
+    navigate(`${item}`);
   };
 
   useEffect(() => {
-    getData({
-      url: `${defaultPage}${page}`,
-    })
-      .then((res) => {
-        setFilms(res.data);
+    const fetchData = () => {
+      const takeCategory = sessionStorage.getItem("category");
+      getData({
+        url: `the-loai/${takeCategory}?page=${page}`,
       })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }, [page, defaultPage]);
+        .then((res) => {
+          setFilms(res.data);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    };
+    fetchData();
+  }, [page, currentPath]);
 
   return (
     <>
       <div className="mt-12">
-        <div className="my-[100px] min-h-[900px]">
+        <div className="m-[100px] min-h-[900px]">
           <div className={`grid ${gridColsClass} grid-flow-row gap-4 `}>
             {films.items &&
               films.items.map((item, index) => {
@@ -115,4 +111,4 @@ const DetailedList = ({ defaultPage }) => {
   );
 };
 
-export default DetailedList;
+export default Category;

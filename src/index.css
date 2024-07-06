@@ -24,6 +24,10 @@ body {
   );
 }
 
+.top_up:hover {
+  transform: scale(1.1);
+}
+
 .wrap-listMovie:hover .listMovies {
   display: flex;
 }
@@ -42,7 +46,8 @@ body {
 }
 
 .banner {
-  clip-path: inset(15% 0% 15% 0%);
+  /* clip-path: inset(15% 0% 15% 0%); */
+  width: calc(100% + 48px)
 }
 
 .banner::after {
@@ -60,9 +65,50 @@ body {
   width: 100%;
   height: 50%;
   position: absolute;
-  bottom: 126px;
+  bottom: 0;
   left: 0;
   background-image: linear-gradient(180deg, transparent, #141414);
+}
+
+.after::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+  border-width: 10px;
+  height: 10px;
+  border-color: transparent transparent #333 transparent;
+}
+
+.arrow::after {
+  content: '';
+  position: absolute;
+  top: -27px;
+  right: 30px;
+  border-width: 14px;
+  height: 10px;
+  border-color: transparent transparent black transparent;
+} 
+
+.category {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 2);
+}
+
+.text_big {
+  font-size: clamp(10px, 5vw, 24px); /* Giá trị tối thiểu là 10px, giá trị ưa thích là 2vh, và giá trị tối đa là 20px */
+}
+
+.text_title {
+  font-size: clamp(14px, 6vw, 30px); /* Giá trị tối thiểu là 10px, giá trị ưa thích là 2vh, và giá trị tối đa là 20px */
+}
+
+.text_small {
+  font-size: clamp(8px, 3.5vw, 18px);
+}
+
+
+.button_slide {
+  font-size: clamp(10px, 5vh, 30px); 
 }
 
 .paginate *  {

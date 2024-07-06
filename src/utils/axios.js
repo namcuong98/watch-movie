@@ -17,6 +17,9 @@ export const saveWordSearch = (word) =>
   sessionStorage.setItem("wordSearch", word);
 export const takeWordSearch = sessionStorage.getItem("wordSearch");
 
+export const saveCategory = (info) => sessionStorage.setItem("category", info);
+export const takeCategory = sessionStorage.getItem("category");
+
 export const getData = (url) => {
   return axiosInstance(url);
 };

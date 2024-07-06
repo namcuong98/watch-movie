@@ -14,7 +14,7 @@ const Paginate = ({ pagination, setPaginate, paginate }) => {
             total={
               pagination.total_page !== undefined
                 ? pagination.total_page
-                : pagination
+                : pagination * 10
             }
             showQuickJumper
             showSizeChanger={false}

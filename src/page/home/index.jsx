@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { selectPage } from "../../redux/navigationSlice";
 import { getRandomBanner } from "./Banner";
 import { useNavigate } from "react-router-dom";
+import { useResponsivenessOverall } from "../../utils/Responsive";
 
 const Home = () => {
   const [newMovies, setNewMovies] = useState([]);
@@ -14,6 +15,7 @@ const Home = () => {
   const [series, setSeries] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [banner, setBanner] = useState({});
+  const { rpsBannerInfoLogo, rpsButtonBanner } = useResponsivenessOverall();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,6 +51,7 @@ const Home = () => {
 
     const observer = new IntersectionObserver(handleScroll, {
       threshold: 1, // 100% của phần phải nằm trong viewport để được coi là nhìn thấy
+      rootMargin: "50px",
     });
 
     sections.forEach((section) => {
@@ -140,7 +143,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <div className="h-[75vh] w-full overflow-hidden">
+        <div className="h-[75vh] w-full overflow-hidden" id="/">
           {/* responsive ở h-[75vh] chỉnh theo chế độ màn hình sửa đen 2 đầu video */}
           <div
             className="absolute left-[-48px] h-[845px] top-[-126px] object-cover wrap-banner"
@@ -148,12 +151,33 @@ const Home = () => {
           >
             {banner.trailer && (
               <>
-                <div className="absolute top-[22%] left-[48px] h-[500px] z-10 ml-[48px]">
-                  <div className="w-[500px] h-[300px]">
-                    <img className="w-full h-full" src={banner.logo} alt="" />
-                    <p className="line-clamp-4">{banner.describe}</p>
-                  </div>
-                  <div className="flex items-center mt-[100px] justify-center">
+                <div
+                  className="absolute top-[22%] left-[48px] h-[500px] z-10 ml-[48px]"
+                  style={{ left: rpsBannerInfoLogo ? "48px" : "-48px" }}
+                >
+                  {rpsBannerInfoLogo ? (
+                    <div className="w-[500px] h-[300px]">
+                      <img className="w-full h-full" src={banner.logo} alt="" />
+                      <p className="line-clamp-4">{banner.describe}</p>
+                    </div>
+                  ) : (
+                    <div className="w-[500px] h-[300px]"></div>
+                  )}
+
+                  <div
+                    className=" items-center mt-[100px] justify-center"
+                    style={
+                      rpsButtonBanner
+                        ? {
+                            display: "block",
+                            marginLeft: "80px",
+                          }
+                        : {
+                            display: "flex",
+                            marginLeft: "0",
+                          }
+                    }
+                  >
                     <button
                       onClick={() => handleWatchMovie(banner)}
                       className="m-3 font-bold bg-[#1cc749] cursor-pointer w-[132px] h-[40px] py-2 px-4 rounded flex gap-2 items-center justify-center hover:bg-[#49d26d] "
@@ -171,7 +195,6 @@ const Home = () => {
                   </div>
                 </div>
                 <video
-                  style={{ width: `calc(100% + 48px)` }}
                   className="banner absolute h-[845px] object-cover"
                   autoPlay
                   muted

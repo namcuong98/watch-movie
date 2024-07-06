@@ -1,14 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchWord } from "../../redux/findFilmSlice";
 import { useNavigate } from "react-router-dom";
 import { saveWordSearch } from "../../utils/axios";
+import { useResponsivenessOverall } from "../../utils/Responsive";
 // import { debounce } from "../../utils/Other";
 
 const Seaching = ({ setIsSearch }) => {
   const navigate = useNavigate();
   // const [word, setWord] = useState();
   const dispatch = useDispatch();
+  const { rpsSearch } = useResponsivenessOverall();
   const word = useSelector((state) => state.findFilm.word);
 
   // const debouncedHandleChange = useCallback(
@@ -32,7 +34,6 @@ const Seaching = ({ setIsSearch }) => {
     setIsSearch(false);
     saveWordSearch(null);
     dispatch(searchWord(""));
-    navigate("/");
   };
 
   return (
@@ -46,6 +47,7 @@ const Seaching = ({ setIsSearch }) => {
       <input
         autoFocus
         className="bg-black pl-1 outline-none"
+        style={{ width: !rpsSearch && "30px" }}
         type="text"
         placeholder="Tìm kiếm tên phim"
         value={word}

@@ -2,17 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { MenuTab, MenuTabRps } from "../utils/MenuTab";
 import ActiveSearch from "./search/ActiveSearch";
-import Notication from "./notication/Notication";
-import { useResponsive } from "../utils/Responsive";
+import { useResponsive, useResponsivenessOverall } from "../utils/Responsive";
 import { useDispatch } from "react-redux";
 import { searchWord } from "../redux/findFilmSlice";
+import LoginButton from "./authentication/LoginButton";
+import LogoutButton from "./authentication/LogoutButton";
+import Category from "./category/Category";
 
 const Layout = () => {
   const [horizontalMenu, setHorizontalMenu] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
+  const [isCategory, setIsCategory] = useState(false);
   const [bgColor, setBgColor] = useState("transparent");
   const [isSearch, setIsSearch] = useState(false);
-  const horizontalMenuRef = useRef(null);
+  const horizontalMenuRef = useRef();
+  const logoutRef = useRef();
+  const categoryRef = useRef();
   const { isRpsMenuDesktop, isRpsMenuMobile } = useResponsive();
+  const { rpsSearch } = useResponsivenessOverall();
   const dispatch = useDispatch();
 
   const openHorizontalMenu = (e) => {
@@ -23,6 +30,22 @@ const Layout = () => {
       setHorizontalMenu(false);
     } else {
       setHorizontalMenu(true);
+    }
+  };
+
+  const openLogout = (e) => {
+    if (logoutRef.current && !logoutRef.current.contains(e.target)) {
+      setIsLogout(false);
+    } else {
+      setIsLogout(true);
+    }
+  };
+
+  const openCategory = (e) => {
+    if (categoryRef.current && !categoryRef.current.contains(e.target)) {
+      setIsCategory(false);
+    } else {
+      setIsCategory(true);
     }
   };
 
@@ -41,9 +64,13 @@ const Layout = () => {
 
   useEffect(() => {
     document.addEventListener("click", openHorizontalMenu);
+    document.addEventListener("click", openLogout);
+    document.addEventListener("click", openCategory);
     document.addEventListener("scroll", handleScroll);
     return () => {
       document.removeEventListener("click", openHorizontalMenu);
+      document.removeEventListener("click", openLogout);
+      document.removeEventListener("click", openCategory);
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -74,7 +101,7 @@ const Layout = () => {
                     className="font-black text-3xl text-red-600"
                     onClick={handleClick}
                   >
-                    Moviez
+                    IQTV
                   </h1>
                 </Link>
               )}
@@ -84,13 +111,23 @@ const Layout = () => {
             </div>
             <div className="flex gap-3 items-center">
               <ActiveSearch isSearch={isSearch} setIsSearch={setIsSearch} />
-              <Notication />
-              <button className=" px-4 py-1 rounded-md border border-red-500">
-                Register
-              </button>
-              <button className=" px-4 py-1 rounded-md border border-red-500">
-                Login
-              </button>
+              {rpsSearch && (
+                <>
+                  <Category
+                    categoryRef={categoryRef}
+                    setIsCategory={setIsCategory}
+                    isCategory={isCategory}
+                  />
+                </>
+              )}
+              <div>
+                <LoginButton />
+                <LogoutButton
+                  logoutRef={logoutRef}
+                  setIsLogout={setIsLogout}
+                  isLogout={isLogout}
+                />
+              </div>
             </div>
           </div>
         </header>
