@@ -4,6 +4,7 @@ import Paginate from "./Paginate";
 import { useNavigate } from "react-router-dom";
 import { useResponsivenessOverall } from "../utils/Responsive";
 import SuggestFilms from "./SuggestFilms";
+import { useMediaQuery } from "react-responsive";
 
 const WatchMovie = () => {
   const [episodes, setEpisodes] = useState([]);
@@ -12,6 +13,23 @@ const WatchMovie = () => {
   const [currentEpisode, setCurrentEpisode] = useState(1);
   const navigate = useNavigate();
   const { rpsBannerInfoLogo } = useResponsivenessOverall();
+  const rpsIs1400 = useMediaQuery({ minWidth: 1400 });
+  const rpsIs1300 = useMediaQuery({ minWidth: 1300 });
+  const rpsIs1200 = useMediaQuery({ minWidth: 1200 });
+  const rpsIs1100 = useMediaQuery({ minWidth: 1100 });
+
+  const getGridColsClass = () => {
+    if (rpsIs1400) {
+      return `p-[200px]`;
+    } else if (rpsIs1300) {
+      return `p-[100px]`;
+    } else if (rpsIs1200) {
+      return `p-[50px]`;
+    } else if (rpsIs1100) {
+      return `p-[20px]`;
+    }
+  };
+  const gridColsClass = getGridColsClass();
 
   const changeFilm = (film) => {
     saveFilm(film);
@@ -52,10 +70,7 @@ const WatchMovie = () => {
   return (
     <>
       <div className="mt-12">
-        <div
-          className="flex w-full justify-center p-[80px]"
-          style={{ padding: rpsBannerInfoLogo ? "80px" : "0" }}
-        >
+        <div className={`flex w-full ${gridColsClass} justify-center`}>
           <div className="w-full">
             {episodes[currentEpisode - 1] &&
               episodes[currentEpisode - 1].embed && (
@@ -71,39 +86,50 @@ const WatchMovie = () => {
                     title="WatchMovie"
                   ></iframe>
                   {rpsBannerInfoLogo && (
-                    <div className="bg-[#1a1c22] absolute right-[-180px] h-full overflow-y-auto">
-                      <div className="w-[180px]">
+                    <div
+                      className="bg-[#1a1c22] absolute right-[-230px] h-full your-container"
+                      style={{ overflowY: "scroll" }}
+                    >
+                      <div className="w-[213px]">
                         <div className="px-3">
                           <p className="py-3 text-base font-bold">
                             {infoFilm.name}
                           </p>
-                          <div className="max-w-[170px] flex items-center gap-2 pb-2">
+                          <div className="max-w-[200px] flex items-center gap-2 pb-2">
                             <div className="max-w-[100px] rounded overflow-hidden">
                               <img src={infoFilm.poster_url} alt="" />
                             </div>
-                            <p className="text-[#1cc749]">
-                              Tập: {currentEpisode}
-                            </p>
+
+                            {infoFilm.total_episodes > 1 ? (
+                              <p className="text-[#1cc749]">
+                                Tập: {currentEpisode}
+                              </p>
+                            ) : (
+                              <p className="text-[#1cc749] text-xs">
+                                {infoFilm.current_episode} {infoFilm.quality}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
-                      <div className="px-3 flex flex-col gap-2">
-                        <p>Phim đề xuất</p>
+                      <div className=" flex flex-col ">
+                        <p className="p-2">Phim đề xuất</p>
                         {suggestFims.map((film) => {
                           return (
                             <>
-                              <div>
-                                <div
-                                  onClick={() => changeFilm(film.slug)}
-                                  className="w-[150px] h-[150px] cursor-pointer rounded overflow-hidden"
-                                >
+                              <div
+                                onClick={() => changeFilm(film.slug)}
+                                className="w-[213px] cursor-pointer flex items-center text-xs py-2 px-3 hover:bg-[#23252b] hover:text-[#1cc749]"
+                              >
+                                <div className="w-[100px] h-[60px] rounded overflow-hidden">
                                   <img
                                     title={film.name}
-                                    className="w-[150px] h-[150px]"
+                                    className="w-[100px] h-[60px]"
                                     src={film.poster_url}
                                     alt=""
                                   />
                                 </div>
+                                <p className="w-[113px] pl-2">{film.name}</p>
                               </div>
                             </>
                           );
@@ -115,17 +141,25 @@ const WatchMovie = () => {
               )}
             <div>
               <p className="pt-10 text_title">{infoFilm.name}</p>
-              <p className="text_big">Tập: {currentEpisode}</p>
+              {infoFilm.total_episodes > 1 ? (
+                <p className="text_big">Tập: {currentEpisode}</p>
+              ) : (
+                <p className="text_big">
+                  {infoFilm.current_episode} {infoFilm.quality}
+                </p>
+              )}
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
-          <Paginate
-            pagination={infoFilm.total_episodes}
-            paginate={currentEpisode}
-            setPaginate={setCurrentEpisode}
-          />
-        </div>
+        {infoFilm.total_episodes > 1 && (
+          <div className="flex justify-center">
+            <Paginate
+              pagination={infoFilm.total_episodes}
+              paginate={currentEpisode}
+              setPaginate={setCurrentEpisode}
+            />
+          </div>
+        )}
         {!rpsBannerInfoLogo && <SuggestFilms films={suggestFims} />}
       </div>
     </>

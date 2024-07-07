@@ -25,7 +25,16 @@ body {
 }
 
 .top_up:hover {
-  transform: scale(1.1);
+  animation: getting_bigger 0.3s ease-in forwards;
+}
+
+@keyframes getting_bigger {
+  0% {
+      transform: scale(100%);
+  }
+  100% {
+      transform: scale(110%);
+  }
 }
 
 .wrap-listMovie:hover .listMovies {
@@ -70,6 +79,32 @@ body {
   background-image: linear-gradient(180deg, transparent, #141414);
 }
 
+.wrap-img::after {
+  content: "";
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  background-image: linear-gradient(180deg, transparent, #141414);
+  animation: getting_bigger 0.3s ease-in forwards;
+}
+
+.wrap-img:hover::after {
+  height: 0;
+}
+
+.wrap-img:hover img {
+  opacity: 0.2;
+}
+
+.img_play:hover div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .after::before {
   content: '';
   position: absolute;
@@ -106,9 +141,19 @@ body {
   font-size: clamp(8px, 3.5vw, 18px);
 }
 
+.play {
+  font-size: clamp(14px, 6vw, 60px);
+}
 
 .button_slide {
   font-size: clamp(10px, 5vh, 30px); 
+}
+
+
+/* Định dạng thanh cuộn */
+.your-container {
+  overflow: hidden scroll;
+  background: rgb(26, 28, 34);
 }
 
 .button_category {

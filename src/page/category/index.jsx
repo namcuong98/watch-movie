@@ -3,6 +3,7 @@ import Paginate from "../../components/Paginate";
 import { useNavigate } from "react-router-dom";
 import { useResponsiveScreen } from "../../utils/Responsive";
 import { getData, saveFilm } from "../../utils/axios";
+import { ListCategory } from "../../components/HardData";
 
 const Category = () => {
   const [films, setFilms] = useState([]);
@@ -25,6 +26,14 @@ const Category = () => {
     return `grid-cols-1`;
   };
   const gridColsClass = getGridColsClass();
+
+  const takeCategory = sessionStorage.getItem("category");
+
+  const nameCategory = ListCategory.filter(
+    (category) => category.item === takeCategory
+  );
+
+  console.log(nameCategory[0].name);
 
   const handleClick = (item) => {
     saveFilm(item);
@@ -50,27 +59,38 @@ const Category = () => {
   return (
     <>
       <div className="mt-12">
-        <div className="m-[100px] min-h-[900px]">
+        <div className="top-[50px] ">
+          <div className="flex text_small mt-5 p-8">
+            <p>Thể loại: </p>
+            <span className="ml-2">Phim {nameCategory[0].name}</span>
+          </div>
+        </div>
+        <div className=" min-h-[900px]">
           <div className={`grid ${gridColsClass} grid-flow-row gap-4 `}>
             {films.items &&
               films.items.map((item, index) => {
                 return (
                   <div
                     key={index}
-                    className="mx-[10px] mt-[10px] mb-10 w-full cursor-pointer "
+                    className=" mt-[10px] mb-10 w-full cursor-pointer "
                     onClick={() => handleClick(item.slug)}
                   >
-                    <div className="w-full h-[300px] relative rounded-tr-md rounded-tl-md overflow-hidden wrap-banner">
-                      <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1">
+                    <div className="w-full h-[300px] relative rounded-tr-md rounded-tl-md overflow-hidden wrap-img">
+                      <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1 z-10">
                         Chỉ có trên IQTV
                       </p>
                       <div className="mb-3 ">
-                        <img
-                          title={item.name}
-                          className="w-full h-[300px] object-cover"
-                          src={item.thumb_url}
-                          alt="Loading"
-                        />
+                        <div className="relative img_play top_up">
+                          <img
+                            title={item.name}
+                            className="w-full h-[300px] object-cover "
+                            src={item.thumb_url}
+                            alt="Loading"
+                          />
+                          <div className="w-full h-full absolute top-0 left-0 hidden z-30">
+                            <i className="fa-solid fa-play play"></i>
+                          </div>
+                        </div>
                         <div className="flex">
                           <div className="absolute bottom-[20px] left-[6px] text-[#fff] z-10 flex items-center gap-2">
                             <i className="fa-solid fa-star"></i>

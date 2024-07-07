@@ -117,7 +117,7 @@ export const ListCategory = [
   {
     key: 15,
     item: "khoa-hoc-vien-tuong",
-    name: "Khoa Học viễn Tưởng",
+    name: "Khoa học viễn tưởng",
   },
   {
     key: 16,

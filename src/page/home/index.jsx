@@ -210,7 +210,7 @@ const Home = () => {
         <div className="relative">
           <div className="mt-9 wrap-listMovie" id="new-movies">
             {<ListMovies path={"new-movies"} title={"Mới & Phổ biến"} />}
-            <div className="flex">
+            <div className="flex ">
               <ContentSlide path={"new-movies"} contentSlide={newMovies} />
             </div>
           </div>

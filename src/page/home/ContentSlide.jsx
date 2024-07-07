@@ -21,7 +21,6 @@ const ContentSlide = ({ contentSlide, path }) => {
   }
 
   const nextSlide = () => {
-    console.log(startIndex);
     setStartIndex((prevIndex) =>
       Math.min(prevIndex + 1, contentSlide.length - itemsPerPage)
     );

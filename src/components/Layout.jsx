@@ -132,7 +132,7 @@ const Layout = () => {
           </div>
         </header>
         <div className="relative overflow-hidden">
-          <div className="px-12">
+          <div className="px-12 min-h-[1100px]">
             <Outlet />
           </div>
         </div>

@@ -258,20 +258,25 @@ const RpsCategory = () => {
             return (
               <div
                 key={index}
-                className="mx-[10px] mt-[10px] mb-10 w-full cursor-pointer "
+                className=" mt-[10px] mb-10 w-full cursor-pointer "
                 onClick={() => handleClick(item.slug)}
               >
-                <div className="w-full h-[300px] relative rounded-tr-md rounded-tl-md overflow-hidden wrap-banner">
-                  <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1">
+                <div className="w-full h-[300px] relative rounded-tr-md rounded-tl-md overflow-hidden wrap-img">
+                  <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1 z-10">
                     Chỉ có trên IQTV
                   </p>
                   <div className="mb-3 ">
-                    <img
-                      title={item.name}
-                      className="w-full h-[300px] object-cover"
-                      src={item.thumb_url}
-                      alt="Loading"
-                    />
+                    <div className="relative img_play top_up">
+                      <img
+                        title={item.name}
+                        className="w-full h-[300px] object-cover "
+                        src={item.thumb_url}
+                        alt="Loading"
+                      />
+                      <div className="w-full h-full absolute top-0 left-0 hidden z-30">
+                        <i className="fa-solid fa-play play"></i>
+                      </div>
+                    </div>
                     <div className="flex">
                       <div className="absolute bottom-[20px] left-[6px] text-[#fff] z-10 flex items-center gap-2">
                         <i className="fa-solid fa-star"></i>
