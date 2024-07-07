@@ -95,8 +95,8 @@ const WatchMovie = () => {
                           <p className="py-3 text-base font-bold">
                             {infoFilm.name}
                           </p>
-                          <div className="max-w-[200px] flex items-center gap-2 pb-2">
-                            <div className="max-w-[100px] rounded overflow-hidden">
+                          <div className="max-w-[200px]  flex items-center gap-2 pb-2">
+                            <div className="max-w-[100px] max-h-[100px] rounded overflow-hidden">
                               <img src={infoFilm.poster_url} alt="" />
                             </div>
 
@@ -121,10 +121,10 @@ const WatchMovie = () => {
                                 onClick={() => changeFilm(film.slug)}
                                 className="w-[213px] cursor-pointer flex items-center text-xs py-2 px-3 hover:bg-[#23252b] hover:text-[#1cc749]"
                               >
-                                <div className="w-[100px] h-[60px] rounded overflow-hidden">
+                                <div className="w-[100px] max-h-[60px] rounded overflow-hidden">
                                   <img
                                     title={film.name}
-                                    className="w-[100px] h-[60px]"
+                                    className="w-[100px]"
                                     src={film.poster_url}
                                     alt=""
                                   />

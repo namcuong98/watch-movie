@@ -43,10 +43,10 @@ const RpsCategory = () => {
     },
     {
       key: 4,
-      item: "hai",
+      item: "phim-hai",
       label: "Hài",
       onClick: () => {
-        setParam("hai");
+        setParam("phim-hai");
       },
     },
     {
@@ -107,10 +107,10 @@ const RpsCategory = () => {
     },
     {
       key: 12,
-      item: "nhac",
+      item: "phim-nhac",
       label: "Nhạc",
       onClick: () => {
-        setParam("nhac");
+        setParam("phim-nhac");
       },
     },
     {
@@ -187,10 +187,10 @@ const RpsCategory = () => {
     },
     {
       key: 22,
-      item: "phim-18+",
+      item: "phim-18",
       label: "Phim 18+",
       onClick: () => {
-        setParam("phim-18+");
+        setParam("phim-18");
       },
     },
   ];

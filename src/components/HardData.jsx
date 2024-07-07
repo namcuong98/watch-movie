@@ -61,7 +61,7 @@ export const ListCategory = [
   },
   {
     key: 4,
-    item: "hai",
+    item: "phim-hai",
     name: "Hài",
   },
   {
@@ -92,7 +92,7 @@ export const ListCategory = [
   {
     key: 10,
     item: "lich-su",
-    name: "Lịch dử",
+    name: "Lịch sử",
   },
   {
     key: 11,
@@ -101,7 +101,7 @@ export const ListCategory = [
   },
   {
     key: 12,
-    item: "nhac",
+    item: "phim-nhac",
     name: "Nhạc",
   },
   {
@@ -151,7 +151,7 @@ export const ListCategory = [
   },
   {
     key: 22,
-    item: "phim-18+",
+    item: "phim-18",
     name: "Phim 18+",
   },
 ];

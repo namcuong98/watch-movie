@@ -43,6 +43,7 @@ const Category = () => {
   useEffect(() => {
     const fetchData = () => {
       const takeCategory = sessionStorage.getItem("category");
+      console.log(takeCategory);
       getData({
         url: `the-loai/${takeCategory}?page=${page}`,
       })
