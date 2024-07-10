@@ -265,7 +265,7 @@ const RpsCategory = () => {
                   <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1 z-10">
                     Chỉ có trên IQTV
                   </p>
-                  <div className="mb-3 ">
+                  <div>
                     <div className="relative img_play top_up">
                       <img
                         title={item.name}
@@ -288,7 +288,7 @@ const RpsCategory = () => {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div classname="mt-3 ">
                   <div className="flex items-start">
                     <span>
                       Tên phim:

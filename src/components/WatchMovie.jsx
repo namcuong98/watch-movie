@@ -36,6 +36,11 @@ const WatchMovie = () => {
     navigate(`/now-showing/${film}`);
   };
 
+  // if (episodes[currentEpisode - 1] && episodes[currentEpisode - 1].embed) {
+  //   let url = episodes[currentEpisode - 1].embed + "&output=embed";
+  //   window.location.replace(url);
+  // }
+
   useEffect(() => {
     const fetchEpisodes = () => {
       const takeFilm = sessionStorage.getItem("infoFilm");

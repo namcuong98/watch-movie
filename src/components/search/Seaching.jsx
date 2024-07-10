@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchWord } from "../../redux/findFilmSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { saveWordSearch } from "../../utils/axios";
 import { useResponsivenessOverall } from "../../utils/Responsive";
 // import { debounce } from "../../utils/Other";
@@ -10,6 +10,8 @@ const Seaching = ({ setIsSearch }) => {
   const navigate = useNavigate();
   // const [word, setWord] = useState();
   const dispatch = useDispatch();
+  const location = useLocation();
+  console.log("location", location);
   const { rpsSearch } = useResponsivenessOverall();
   const word = useSelector((state) => state.findFilm.word);
 

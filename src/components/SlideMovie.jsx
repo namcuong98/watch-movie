@@ -19,7 +19,7 @@ const SlideMovie = ({ item, path }) => {
           <p className="absolute text-xs rounded-sm top-0 right-0 bg-[#f2bf83] text-[#333] font-bold p-1">
             Chỉ có trên IQTV
           </p>
-          <div className="mb-3 ">
+          <div classname="mt-3 ">
             <img
               title={item.name}
               className="w-full h-[300px] object-cover"

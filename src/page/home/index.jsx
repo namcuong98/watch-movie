@@ -49,6 +49,9 @@ const Home = () => {
       });
     };
 
+    // if (newMovies.length !== 0 && isShowing.length !== 0 && movies.length !== 0 &&series.length !== 0 && tvShows.length !==0) {
+
+    // }
     const observer = new IntersectionObserver(handleScroll, {
       threshold: 1, // 100% của phần phải nằm trong viewport để được coi là nhìn thấy
       rootMargin: "50px",
@@ -70,10 +73,6 @@ const Home = () => {
       });
     };
   }, [dispatch]);
-
-  // if (newMovies.length !== 0 && isShowing.length !== 0 && movies.length !== 0 &&series.length !== 0 && tvShows.length !==0) {
-
-  // }
 
   useEffect(() => {
     const infoBanner = getRandomBanner();

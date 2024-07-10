@@ -7,9 +7,9 @@ const Category = ({ categoryRef, setIsCategory, isCategory }) => {
       <div
         ref={categoryRef}
         onClick={() => setIsCategory(!isCategory)}
-        className="relative "
+        className="relative cursor-pointer"
       >
-        <div className="flex gap-2 items-center ">
+        <div className="flex gap-2 items-center">
           <p>Thể loại</p>
           {!isCategory ? (
             <div>
