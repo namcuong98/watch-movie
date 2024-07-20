@@ -33,7 +33,7 @@ body {
       transform: scale(100%);
   }
   100% {
-      transform: scale(110%);
+      transform: scale(105%);
   }
 }
 
@@ -74,7 +74,8 @@ body {
   width: 100%;
   height: 50%;
   position: absolute;
-  bottom: -1px;
+  bottom: -2px;
+  animation: getting_bigger 0.3s ease-in forwards;
   left: 0;
   background-image: linear-gradient(180deg, transparent, #141414);
 }
@@ -84,7 +85,7 @@ body {
   width: 100%;
   height: 50%;
   position: absolute;
-  bottom: 6px;
+  bottom: 3px;
   left: 0;
   background-image: linear-gradient(180deg, transparent, #141414);
   animation: getting_bigger 0.3s ease-in forwards;

@@ -116,7 +116,7 @@ const FilmDetail = () => {
                         <li
                           onClick={() => handleCategory(item)}
                           key={index}
-                          className="bg-[#ffffff14] p-1 hover:bg-[#ffffff33] cursor-pointer"
+                          className="bg-[#ffffff33] p-1 hover:bg-[#ffffff54] cursor-pointer"
                         >
                           {item.name}
                         </li>
